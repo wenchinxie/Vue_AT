@@ -16,7 +16,7 @@
             <tbody>
                 <keep-alive>
                     <tr v-for="value in table">
-                        <td v-for="v,k,i in value" :key="v.id">
+                        <td v-for="v, k, i in value" :key="v.id">
                             <a v-if="i < 3">{{v}}</a>
                             <a v-else-if="v.charAt(0)==='-'" style="color:#16a085;">{{v}}</a>
                             <a v-else style="color:red;">{{v}}</a>

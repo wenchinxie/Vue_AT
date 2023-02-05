@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Product from '../views/Product.vue'
 import Textile from '../views/Industry/Textile/Textile.vue'
+import DayTransaction from '@/views/Comp/DayTransaction.vue'
+
 
 const routes = [
   {
@@ -27,6 +29,11 @@ const routes = [
     path: '/Industry/Textile',
     name:'Textile',
     component: Textile
+  },
+  {
+    path: '/comp/:stockid/DayTransaction',
+    name:'DayTransaction',
+    component: DayTransaction
   }
 ]
 

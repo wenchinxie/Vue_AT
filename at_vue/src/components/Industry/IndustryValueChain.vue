@@ -10,8 +10,13 @@
                             </div>
                             <div v-for="item in sub.Detail">
                                 <p class="card-text fs-5 mt-3 mb-2">-{{item.cat}}</p>
-                                <div class="hstack gap-1 mb-1" v-if="item.com[0]!=''" v-for="arr,i in item.com" >
-                                    <a v-for="comp,j in arr" :href="'/'+ item.code[[i]][j]" class="btn bg-warning fs-6 text-white bg-opacity-10 border border-warning border-start rounded-end w-100">
+                                <div class="hstack gap-1 mb-1 d-flex justify-content-between" 
+                                v-if="item.com[0]!=''" v-for="arr,i in item.com" >
+
+                                    <a v-for="comp,j in arr" :href="'/Comp/'+ item.code[[i]][j]" 
+                                    class="btn bg-warning fs-6 text-white bg-opacity-10 
+                                    border border-warning border-start rounded-end w-100 ">
+
                                         {{comp}}
                                     </a>
                                 </div>
@@ -46,7 +51,7 @@
 
 <script>
     export default {
-        name:'Industry_ValueChain',
+        name:'IndustryValueChain',
         props:{ ChainItem:Object}
     }
 

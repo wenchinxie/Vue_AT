@@ -1,12 +1,12 @@
 <template>
 
     <div class="container-fluid" style="background-color:#000000">
-        <div class="row h-100 mt-3">
+        <div class="row mt-3">
             <h1 class="mt-5 ms-3 fw-bold text-white text-center">產業鏈</h1>
-            <Industry_ValueChain
+            <IndustryValueChain
                 v-for="ChainItem in ChainItems"
                 :ChainItem="ChainItem"
-            ></Industry_ValueChain>
+            ></IndustryValueChain>
         </div>
     </div>
 
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import Industry_ValueChain from '../../../components/Industry/Industry_ValueChain'
+import IndustryValueChain from '../../../components/Industry/IndustryValueChain'
 
 export default {
     name:'Textile',
     components:{
-        Industry_ValueChain
+        IndustryValueChain
     },
     data(){
         return{

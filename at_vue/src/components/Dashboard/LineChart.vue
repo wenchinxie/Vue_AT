@@ -41,7 +41,7 @@ export default {
                 this.opentemp = response.data
                 this.productname=''
 
-                const productname=this.opentemp[0].productname
+                const productname = this.opentemp[0].productname
 
                 for (this.xi of this.opentemp) {
                     this.date.push(this.xi.date)
