@@ -60,7 +60,7 @@ export default {
                 y: [1200, 1190.989998, 1190.779999, 1200, 120.080002, 119.970001, 121.879997, 121.940002, 121.949997, 121.629997, 121.349998, 128.75, 128.529999, 129.080002, 130.289993, 131.529999, 132.039993, 132.419998, 132.119995], 
                 name: 'LA Zoa',
                 type: 'bar',
-                xaxis:'x2',
+                xaxis:'x',
                 yaxis:'y2',
                 };
                 
@@ -69,7 +69,7 @@ export default {
                 y: [900, 1090.989998, 1390.779999, 1400, 150.080002, 219.970001, 121.879997, 121.940002, 121.949997, 121.629997, 121.349998, 128.75, 128.529999, 129.080002, 130.289993, 131.529999, 132.039993, 132.419998, 132.119995], 
                 name: 'LA Zoo',
                 type: 'bar',
-                xaxis:'x2',
+                xaxis:'x',
                 yaxis:'y2',
             };
 
@@ -78,49 +78,93 @@ export default {
             // var groupedDataWeek = Plotly.groupby(candlestick_trace, 'x', 'week')
 
             var layout = {       
-                barmode:'grouped',
-                dragmode: 'zoom',
-                showlegend: true,
-                height: this.row*500,
                 grid: {
                     rows: 3,
                     columns: 1,
                     roworder:'top to bottom',
-                    pattern:'independent'
+                    pattern:'coupled',
+                    ygap:0.7
                 },
                 xaxis: {
+                    domain:[0,1],
                     autorange: true,
                     title: 'Date',
                     rangeslider: {visible: false},
                     rangebreaks: [{
                         values: this.non_trading_dates
                     }],
+                    rangeselector: {
+                        x: 0,
+                        y: 1.2,
+                        xanchor: 'left',
+                        font: {size:18},
+                        buttons: [{
+                            step: 'month',
+                            stepmode: 'backward',
+                            count: 1,
+                            label: '1 month'
+                        }, {
+                            step: 'month',
+                            stepmode: 'backward',
+                            count: 6,
+                            label: '6 months'
+                        }, {
+                            step: 'all',
+                            label: 'All dates'
+                        }]
+                    },
+
                     anchor:'y',
-                    id:'x'
+                    id:'x',
+                    showspikes: true,
+                },
+                xaxis2:{
+                    matches: 'x',
+                    anchor: 'x',
+                    rangebreaks: [{
+                        values: this.non_trading_dates
+                    }],
                 },
                 yaxis: {
-                        showgrid: true,
-                        zeroline: false,
-                        showline: false,
-                        anchor:'x',
-                        id:'y'
+                    domain: [0.6,1],
+                    showgrid: true,
+                    zeroline: false,
+                    showline: false,
+                    id:'y'
                     },
                 yaixs2: {
+                    domain: [0, 0.4],
                     title: 'Bar chart',
                     anchor: 'x',
                     side: 'left',
-                    overlaying: 'y',
                     id: 'y2'
                 },
-                xref: 'paper'
+                barmode:'grouped',
+                showlegend: true,
+                height: this.row*500,
+                spikemode: 'across',
+                spikesnap: 'cursor',
+                hovermode: 'x unified',
+                calendar :'taiwan'
             }
 
-            Plotly.newPlot('candle_stick_plot', stock_price, layout);
+            var config = {
+                displayModeBar: false,
+                responsive: true
+                };
 
+            Plotly.newPlot('candle_stick_plot', stock_price, layout, config);
 
+            var myPlot = document.getElementById('candle_stick_plot');
+            
+            myPlot.on('plotly_hover', function(eventdata){
+                if(eventdata.xvals){
+                    Plotly.Fx.hover(myPlot,
+                    {xval:eventdata.xvals[0]},
+                    ['xy','xy2'])
+                }
+        })},
 
-
-        },
     async getDayTransaction(){
         // Draw a vertical line and move as users' mouse moves 
         var trace1 = {
@@ -206,6 +250,8 @@ export default {
     }
     ,
     async getDayTransaction1(){
+
+
         var trace1 = {
         x: [1, 2, 3, 4],
         close: [10, 15, 13, 17],
@@ -221,7 +267,7 @@ export default {
         x: [1, 2, 3, 4],
         y: [16, 5, 11, 9],
         type: "bar",
-        xaxis: "x",
+        xaxis: "x1",
         yaxis: "y2"
         };
 
@@ -230,7 +276,8 @@ export default {
             rangeslider: {},
             domain: [0, 1],
             anchor: "y",
-            id: "x"
+            id: "x",
+            hovermode: 'x unified'
         },
         yaxis: {
             title: "Candlestick",
@@ -292,5 +339,6 @@ export default {
             
 }
 }
+
 
 </script>
